@@ -1,0 +1,37 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./lab2/app
+          file: ./lab2/app/Dockerfile
+          push: true
+          tags: artemmalikov02/my-flask-app:latest
+
+      - name: Deploy notification
+        run: |
+          echo "Docker image built and pushed successfully!"
+          echo "Image: artemmalikov02/my-flask-app:latest"
+          echo "Ready for deployment!"
