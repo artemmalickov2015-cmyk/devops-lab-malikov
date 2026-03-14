@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/devops-lab-pomortseva:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/devops-lab-malikov:latest
 
       - name: Deploy
-        run: echo "Image successfully deployed!"
+        run: echo "Image deployed!"
