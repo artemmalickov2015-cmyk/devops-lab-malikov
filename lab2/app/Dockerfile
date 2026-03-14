@@ -1,21 +1,32 @@
+# Базовый образ Python 3.9 slim
 FROM python:3.9-slim
 
+# Рабочая директория
 WORKDIR /app
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl vim && \
-    rm -rf /var/lib/apt/lists/*
+# Обновляем список пакетов и устанавливаем системные зависимости
+RUN apt-get update && apt-get install -y curl vim
 
+# Копируем файл зависимостей
 COPY requirements.txt .
+
+# Устанавливаем Python-пакеты
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app.py .
+# Создаём пользователя appuser с UID 1000
+RUN useradd -u 1000 -m -s /bin/bash appuser
 
-RUN useradd -u 1000 -m appuser
+# Переключаемся на пользователя appuser
 USER appuser
 
-ENV FLASK_ENV=production
+# Копируем основной файл приложения
+COPY app.py .
 
+# Открываем порт 5000
 EXPOSE 5000
 
+# Устанавливаем переменную окружения
+ENV FLASK_ENV=production
+
+# Запускаем приложение
 CMD ["python", "app.py"]
