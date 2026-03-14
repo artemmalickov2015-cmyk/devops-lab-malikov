@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/devops-lab-malikov:latest
-
+          tags: artemmalikov02/ci_cd_malikov_artem
+          
       - name: Deploy
         run: echo "Image deployed!"
