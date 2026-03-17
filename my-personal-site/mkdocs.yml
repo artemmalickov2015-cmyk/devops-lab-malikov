@@ -1,7 +1,7 @@
-site_name: Персональный сайт Маликов Артем
+site_name: Маликов Артем
 site_description: Это мой первый сайт, созданный в рамках курсовой работы на курсе ICT с использованием технологии MkDocs по предмету "Введение в веб технологии"
 site_author: Артем Маликов
-site_url: https://github.com/artemmalickov2015-cmyk
+site_url: http://127.0.0.1:8000/
 
 theme:
   name: material
@@ -15,7 +15,7 @@ theme:
     - navigation.expand
     - content.code.copy
   palette:
-    primary: blue
+    primary: red
     accent: purple
 
 markdown_extensions:
